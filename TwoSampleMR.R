@@ -47,6 +47,7 @@ maffile_path = "E:/OneDrive/mendelR/Dependent_files/" # fileFrequency.frq文件�
 setwd("E:/OneDrive/mendelR/") # 设置本地路径
 getwd()
 
+
 # ---- 定义get_eaf_from_1000G函数功能：提取SNP的EAF值 ----
 ## 来自github("HaobinZhou/Get_MR")（该包已停止维护）的get_eaf_from_1000G函数，用于从1000G的MAF文件中提取EAF并将其与输入数据匹配。
 get_eaf_from_1000G<-function(dat,path,type="exposure"){
@@ -165,6 +166,8 @@ get_f<-function(dat,F_value=10){
     return(dat)
   }
 }
+
+
 # ---- 通过样本量计算功率 ----
 n <- (16587+155860)  # 表示16587 cases, 155860 controls
 ratio <- 16587/155860
@@ -203,6 +206,7 @@ dest.plot <- "bacterial_pneumonia_power_2SMR.png"
 png(dest.plot, width = 10*500, height = 5*500, res=500)
 PowerPlot
 dev.off()
+
 
 # ---- 读取本地暴露数据并进行本地clump ----
 exp_MiBioGen <- fread("Taxa_abundance/MiBioGen.allHits.p1e4.txt",header = T) # 读取本地数据
@@ -249,11 +253,13 @@ exp_MiBioGen_clump <- ld_clump( # 本地clump
 
 ivs_MiBioGen <- subset(exp_MiBioGen_eaf,SNP %in% exp_MiBioGen_clump$rsid) # clump后工具变量个snps数据表
 
+
 # ---- 计算F统计量 ----
 ivs_MiBioGen_f <- get_f(ivs_MiBioGen, F_value = 10) # F>10表示工具变量足够强
 summary(ivs_MiBioGen_f$F)
 summary(ivs_MiBioGen_f$R2)
 write.csv(ivs_MiBioGen_f, "ivs_MiBioGen.csv") # 剔除弱工具变量后的工具变量表
+
 
 # ---- 读取结局并与暴露进行harmonization ----
 out_bacterial_pneumonia_orig <- fread("diseases/f~~~.gz",  # 读取结局，以finngen数据库数据为例
@@ -296,6 +302,7 @@ harmonise_data_final <- subset(harmonise_data,
                                !harmonise_data$id.exposure %in% snp_lesthan_3$Var1)
 write.csv(harmonise_data_final, "harmonise_data_final.csv") # 导出
 rm(list = ls()) # 删除当前工作环境中所有对象
+
 
 # ---- MR分析 ----
 harmonise_data_final <- fread("harmonise_data_final.csv", header = T)
@@ -365,6 +372,7 @@ res_ivw_p5e2 <- res_data %>% # 过滤出IVW_p5E-2的显著IVs结果
 
 write.csv(res_single, "res_single_snp.csv")
 write.csv(res_ivw_p5e2, "res_ivw_p5e2.csv")
+
 
 # ---- 每个IVs_p5e2的因果效应散点图 ----
 mr_scatter <- mr_scatter_plot(res_data, harmonise_data)
@@ -478,6 +486,7 @@ for(i in 1:nrow(res_ivw_p5e2)) {
     dev.off() 
   })
 }
+
 
 # ---- 异质性分析和多效性分析 ----
 Het<-mr_heterogeneity(harmonise_data)
