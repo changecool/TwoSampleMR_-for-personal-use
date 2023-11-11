@@ -1,8 +1,8 @@
 # ---- 批量下载GWAS catalog数据 ----
 setwd("~") # 设置下载文件位置
 options(timeout=300)  # 设置超时为300秒
-files <- paste0("33462482-", "GCST", 90011301:90011730, "-EFO_0007874",".h.tsv.gz")
-urls <- paste0("ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/",
+files <- paste0("33462482-", "GCST", 90011301:90011730, "-EFO_0007874",".h.tsv.gz") # 设置下载文件名
+urls <- paste0("ftp://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/", # 自行设置文件下载地址
                "GCST90011001-GCST90012000/",
                "GCST",
                90011301:90011730,
