@@ -39,6 +39,8 @@ library(dplyr)
 library(data.table)
 library(doParallel)
 library(RadialMR)
+
+
 # ---- 读取本地clump所需文件路径 ----
 get_plink_exe() # 获取plink.exe本地位置，并填入下行。
 plink_path = "C:/Users/TCMzh/AppData/Local/R/win-library/4.3/plinkbinr/bin/plink_Windows.exe"
