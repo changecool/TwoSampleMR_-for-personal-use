@@ -627,7 +627,7 @@ mr_presso <- mr_presso(BetaOutcome = "beta.outcome",
                               OUTLIERtest = TRUE, 
                               DISTORTIONtest = TRUE, 
                               data = harmonise_single, 
-                              NbDistribution = 3000,  
+                              NbDistribution = 3000,   # ND值1000到10000，根据SNP数量和电脑配置自行调节
                               SignifThreshold = 0.05)
 write.table(mr_presso, "bmi_mr_presso.txt")
 
